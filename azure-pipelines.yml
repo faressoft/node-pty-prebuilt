@@ -19,8 +19,6 @@ jobs:
         build_target: 7.0.0
       ABI_57_v8:
         build_target: 8.0.0
-      ABI_57_v8:
-        build_target: 8.0.0
       ABI_59_v9:
         build_target: 9.11.2
       ABI_64_v10:
