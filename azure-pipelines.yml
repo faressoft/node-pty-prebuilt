@@ -9,6 +9,16 @@ jobs:
     vmImage: 'ubuntu-18.04'
   strategy:
     matrix:
+      ABI_46_v4:
+        build_target: 4.0.0
+      ABI_47_v5:
+        build_target: 5.0.0
+      ABI_48_v6:
+        build_target: 6.0.0
+      ABI_51_v7:
+        build_target: 7.0.0
+      ABI_57_v8:
+        build_target: 8.0.0
       ABI_57_v8:
         build_target: 8.0.0
       ABI_59_v9:
@@ -49,6 +59,14 @@ jobs:
     vmImage: 'xcode9-macos10.13'
   strategy:
     matrix:
+      ABI_46_v4:
+        build_target: 4.0.0
+      ABI_47_v5:
+        build_target: 5.0.0
+      ABI_48_v6:
+        build_target: 6.0.0
+      ABI_51_v7:
+        build_target: 7.0.0
       ABI_57_v8:
         build_target: 8.0.0
       ABI_59_v9:
@@ -83,6 +101,14 @@ jobs:
     vmImage: 'vs2017-win2016'
   strategy:
     matrix:
+      ABI_46_v4:
+        build_target: 4.0.0
+      ABI_47_v5:
+        build_target: 5.0.0
+      ABI_48_v6:
+        build_target: 6.0.0
+      ABI_51_v7:
+        build_target: 7.0.0
       ABI_57_v8:
         build_target: 8.0.0
       ABI_59_v9:
