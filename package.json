@@ -1,8 +1,8 @@
 {
-  "name": "node-pty-prebuilt",
+  "name": "@faressoft/node-pty-prebuilt",
   "description": "A parallel fork of node-pty providing prebuilt packages for Node.js and Electron",
   "author": {
-    "name": "David Wilson"
+    "name": "Mohammad Fares"
   },
   "version": "0.9.0",
   "license": "MIT",
