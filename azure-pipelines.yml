@@ -58,7 +58,7 @@ jobs:
   #     displayName: 'Prebuild and publish'
   - job: macOS
     pool:
-      vmImage: 'xcode9-macos10.13'
+      vmImage: 'macOS-latest'
     strategy:
       matrix:
         ABI_46_v4:
