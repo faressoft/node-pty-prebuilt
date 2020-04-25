@@ -2,6 +2,8 @@
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+{ runtime: 'node', target: '13.0.0', abi: '79', lts: false },
+{ runtime: 'node', target: '14.0.0', abi: '83', lts: false },
 
 jobs:
 - job: Linux
@@ -27,6 +29,10 @@ jobs:
         build_target: 11.0.0
       ABI_72_v12:
         build_target: 12.0.0
+      ABI_79_v13:
+        build_target: 13.0.0
+      ABI_83_v14:
+        build_target: 14.0.0
   steps:
   - script: |
       sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
@@ -75,6 +81,10 @@ jobs:
         build_target: 11.0.0
       ABI_72_v12:
         build_target: 12.0.0
+      ABI_79_v13:
+        build_target: 13.0.0
+      ABI_83_v14:
+        build_target: 14.0.0
   steps:
   - task: NodeTool@0
     inputs:
@@ -117,6 +127,10 @@ jobs:
         build_target: 11.0.0
       ABI_72_v12:
         build_target: 12.0.0
+      ABI_79_v13:
+        build_target: 13.0.0
+      ABI_83_v14:
+        build_target: 14.0.0
   steps:
   - task: NodeTool@0
     inputs:
