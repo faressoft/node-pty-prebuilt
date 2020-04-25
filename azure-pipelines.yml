@@ -4,152 +4,153 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 jobs:
-- job: Linux
-  pool:
-    vmImage: 'ubuntu-18.04'
-  strategy:
-    matrix:
-      ABI_46_v4:
-        build_target: 4.0.0
-      ABI_47_v5:
-        build_target: 5.0.0
-      ABI_48_v6:
-        build_target: 6.0.0
-      ABI_51_v7:
-        build_target: 7.0.0
-      ABI_57_v8:
-        build_target: 8.0.0
-      ABI_59_v9:
-        build_target: 9.11.2
-      ABI_64_v10:
-        build_target: 10.0.0
-      ABI_67_v11:
-        build_target: 11.0.0
-      ABI_72_v12:
-        build_target: 12.0.0
-      ABI_79_v13:
-        build_target: 13.0.0
-      ABI_83_v14:
-        build_target: 14.0.0
-  steps:
-  - script: |
-      sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-      sudo apt -y update
-      sudo apt-get install g++-multilib
-    displayName: 'Install build tools'
-  - task: NodeTool@0
-    inputs:
-      versionSpec: 8.x
-    displayName: 'Install Node.js'
-  - script: |
-      npm i
-    displayName: 'Install dependencies and build'
-  - script: |
-      npm test
-    displayName: 'Test'
-  - script: |
-      npm run lint
-    displayName: 'Lint'
-  - script: |
-      npx prebuild -t $(build_target) -u $GITHUB_RELEASE_TOKEN
-      npx prebuild -t $(build_target) -a ia32 -u $GITHUB_RELEASE_TOKEN
-    env:
-      GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
-    displayName: 'Prebuild and publish'
-- job: macOS
-  pool:
-    vmImage: 'xcode9-macos10.13'
-  strategy:
-    matrix:
-      ABI_46_v4:
-        build_target: 4.0.0
-      ABI_47_v5:
-        build_target: 5.0.0
-      ABI_48_v6:
-        build_target: 6.0.0
-      ABI_51_v7:
-        build_target: 7.0.0
-      ABI_57_v8:
-        build_target: 8.0.0
-      ABI_59_v9:
-        build_target: 9.11.2
-      ABI_64_v10:
-        build_target: 10.0.0
-      ABI_67_v11:
-        build_target: 11.0.0
-      ABI_72_v12:
-        build_target: 12.0.0
-      ABI_79_v13:
-        build_target: 13.0.0
-      ABI_83_v14:
-        build_target: 14.0.0
-  steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: 8.x
-    displayName: 'Install Node.js'
-  - script: |
-      npm i
-    displayName: 'Install dependencies and build'
-  - script: |
-      npm test
-    displayName: 'Test'
-  - script: |
-      npm run lint
-    displayName: 'Lint'
-  - script: |
-      npx prebuild -t $(build_target) -u $GITHUB_RELEASE_TOKEN
-    env:
-      GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
-    displayName: 'Prebuild and publish'
-- job: Windows
-  pool:
-    vmImage: 'vs2017-win2016'
-  strategy:
-    matrix:
-      ABI_46_v4:
-        build_target: 4.0.0
-      ABI_47_v5:
-        build_target: 5.0.0
-      ABI_48_v6:
-        build_target: 6.0.0
-      ABI_51_v7:
-        build_target: 7.0.0
-      ABI_57_v8:
-        build_target: 8.0.0
-      ABI_59_v9:
-        build_target: 9.11.2
-      ABI_64_v10:
-        build_target: 10.0.0
-      ABI_67_v11:
-        build_target: 11.0.0
-      ABI_72_v12:
-        build_target: 12.0.0
-      ABI_79_v13:
-        build_target: 13.0.0
-      ABI_83_v14:
-        build_target: 14.0.0
-  steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: 8.x
-    displayName: 'Install Node.js'
-  - task: UsePythonVersion@0
-    inputs:
-      versionSpec: '2.7'
-      architecture: 'x64'
-  - script: |
-      npm config set msvs_version 2017
-    displayName: 'Use MSVC 2017'
-  - script: |
-      npm i
-    displayName: 'Install dependencies and build'
-  - script: |
-      npm run lint
-    displayName: 'Lint'
-  - script: |
-      npx prebuild -t $(build_target) --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
-      npx prebuild -t $(build_target) -a ia32 --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
-    env:
-      GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
-    displayName: 'Prebuild and publish'
+  # - job: Linux
+  #   pool:
+  #     vmImage: 'ubuntu-18.04'
+  #   strategy:
+  #     matrix:
+  #       ABI_46_v4:
+  #         build_target: 4.0.0
+  #       ABI_47_v5:
+  #         build_target: 5.0.0
+  #       ABI_48_v6:
+  #         build_target: 6.0.0
+  #       ABI_51_v7:
+  #         build_target: 7.0.0
+  #       ABI_57_v8:
+  #         build_target: 8.0.0
+  #       ABI_59_v9:
+  #         build_target: 9.11.2
+  #       ABI_64_v10:
+  #         build_target: 10.0.0
+  #       ABI_67_v11:
+  #         build_target: 11.0.0
+  #       ABI_72_v12:
+  #         build_target: 12.0.0
+  #       ABI_79_v13:
+  #         build_target: 13.0.0
+  #       ABI_83_v14:
+  #         build_target: 14.0.0
+  #   steps:
+  #   - script: |
+  #       sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+  #       sudo apt -y update
+  #       sudo apt-get install g++-multilib
+  #     displayName: 'Install build tools'
+  #   - task: NodeTool@0
+  #     inputs:
+  #       versionSpec: 8.x
+  #     displayName: 'Install Node.js'
+  #   - script: |
+  #       npm i
+  #     displayName: 'Install dependencies and build'
+  #   - script: |
+  #       npm test
+  #     displayName: 'Test'
+  #   - script: |
+  #       npm run lint
+  #     displayName: 'Lint'
+  #   - script: |
+  #       npx prebuild -t $(build_target) -u $GITHUB_RELEASE_TOKEN
+  #       npx prebuild -t $(build_target) -a ia32 -u $GITHUB_RELEASE_TOKEN
+  #     env:
+  #       GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
+  #     displayName: 'Prebuild and publish'
+  - job: macOS
+    pool:
+      vmImage: 'xcode9-macos10.13'
+    strategy:
+      matrix:
+        ABI_46_v4:
+          build_target: 4.0.0
+        ABI_47_v5:
+          build_target: 5.0.0
+        ABI_48_v6:
+          build_target: 6.0.0
+        ABI_51_v7:
+          build_target: 7.0.0
+        ABI_57_v8:
+          build_target: 8.0.0
+        ABI_59_v9:
+          build_target: 9.11.2
+        ABI_64_v10:
+          build_target: 10.0.0
+        ABI_67_v11:
+          build_target: 11.0.0
+        ABI_72_v12:
+          build_target: 12.0.0
+        ABI_79_v13:
+          build_target: 13.0.0
+        ABI_83_v14:
+          build_target: 14.0.0
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: 8.x
+      displayName: 'Install Node.js'
+    - script: |
+        npm i
+      displayName: 'Install dependencies and build'
+    - script: |
+        npm test
+      displayName: 'Test'
+    - script: |
+        npm run lint
+      displayName: 'Lint'
+    - script: |
+        npx prebuild -t $(build_target) -u $GITHUB_RELEASE_TOKEN
+      env:
+        GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
+      displayName: 'Prebuild and publish'
+  # - job: Windows
+  #   pool:
+  #     vmImage: 'vs2017-win2016'
+  #   strategy:
+  #     matrix:
+  #       ABI_46_v4:
+  #         build_target: 4.0.0
+  #       ABI_47_v5:
+  #         build_target: 5.0.0
+  #       ABI_48_v6:
+  #         build_target: 6.0.0
+  #       ABI_51_v7:
+  #         build_target: 7.0.0
+  #       ABI_57_v8:
+  #         build_target: 8.0.0
+  #       ABI_59_v9:
+  #         build_target: 9.11.2
+  #       ABI_64_v10:
+  #         build_target: 10.0.0
+  #       ABI_67_v11:
+  #         build_target: 11.0.0
+  #       ABI_72_v12:
+  #         build_target: 12.0.0
+  #       ABI_79_v13:
+  #         build_target: 13.0.0
+  #       ABI_83_v14:
+  #         build_target: 14.0.0
+  #   steps:
+  #   - task: NodeTool@0
+  #     inputs:
+  #       versionSpec: 8.x
+  #     displayName: 'Install Node.js'
+  #   - task: UsePythonVersion@0
+  #     inputs:
+  #       versionSpec: '2.7'
+  #       architecture: 'x64'
+  #   - script: |
+  #       npm config set msvs_version 2017
+  #     displayName: 'Use MSVC 2017'
+  #   - script: |
+  #       npm i
+  #     displayName: 'Install dependencies and build'
+  #   - script: |
+  #       npm run lint
+  #     displayName: 'Lint'
+  #   - script: |
+  #       npx prebuild -t $(build_target) --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
+  #       npx prebuild -t $(build_target) -a ia32 --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
+  #     env:
+  #       GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
+  #     displayName: 'Prebuild and publish'
+  
