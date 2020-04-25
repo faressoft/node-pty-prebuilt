@@ -2,8 +2,6 @@
 # Build a general Node.js project with npm.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-{ runtime: 'node', target: '13.0.0', abi: '79', lts: false },
-{ runtime: 'node', target: '14.0.0', abi: '83', lts: false },
 
 jobs:
 - job: Linux
