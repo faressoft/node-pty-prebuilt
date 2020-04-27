@@ -104,7 +104,7 @@ jobs:
   #     displayName: 'Prebuild and publish'
   - job: Windows
     pool:
-      vmImage: "vs2017-win2016"
+      vmImage: "windows-2019"
     strategy:
       matrix:
         # ABI_46_v4:
@@ -139,8 +139,8 @@ jobs:
           versionSpec: "2.7"
           architecture: "x64"
       - script: |
-          npm config set msvs_version 2017
-        displayName: "Use MSVC 2017"
+          npm config set msvs_version 2019
+        displayName: "Use MSVC 2019"
       - script: |
           npm i
         displayName: "Install dependencies and build"
