@@ -58,7 +58,7 @@ jobs:
   #     displayName: 'Prebuild and publish'
   # - job: macOS
   #   pool:
-  #     vmImage: 'macOS-latest'
+  #     vmImage: 'xcode9-macos10.13'
   #   strategy:
   #     matrix:
   #       ABI_46_v4:
@@ -153,4 +153,3 @@ jobs:
       env:
         GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
       displayName: 'Prebuild and publish'
-  
