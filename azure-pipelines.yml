@@ -104,7 +104,7 @@ jobs:
   #     displayName: 'Prebuild and publish'
   - job: Windows
     pool:
-      vmImage: 'vs2017-win2016'
+      vmImage: "vs2017-win2016"
     strategy:
       matrix:
         # ABI_46_v4:
@@ -130,26 +130,26 @@ jobs:
         ABI_83_v14:
           build_target: 14.0.0
     steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: 8.x
-      displayName: 'Install Node.js'
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '2.7'
-        architecture: 'x64'
-    - script: |
-        npm config set msvs_version 2017
-      displayName: 'Use MSVC 2017'
-    - script: |
-        npm i
-      displayName: 'Install dependencies and build'
-    - script: |
-        npm run lint
-      displayName: 'Lint'
-    - script: |
-        npx prebuild -t $(build_target) --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
-        npx prebuild -t $(build_target) -a ia32 --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
-      env:
-        GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
-      displayName: 'Prebuild and publish'
+      - task: NodeTool@0
+        inputs:
+          versionSpec: 8.x
+        displayName: "Install Node.js"
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: "2.7"
+          architecture: "x64"
+      - script: |
+          npm config set msvs_version 2017
+        displayName: "Use MSVC 2017"
+      - script: |
+          npm i
+        displayName: "Install dependencies and build"
+      - script: |
+          npm run lint
+        displayName: "Lint"
+      - script: |
+          npx prebuild -t $(build_target) --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
+          npx prebuild -t $(build_target) -a ia32 --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
+        env:
+          GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
+        displayName: "Prebuild and publish"
