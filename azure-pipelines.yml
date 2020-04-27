@@ -132,7 +132,7 @@ jobs:
     steps:
     - task: NodeTool@0
       inputs:
-        versionSpec: 8.x
+        versionSpec: 14.x
       displayName: 'Install Node.js'
     - task: UsePythonVersion@0
       inputs:
@@ -148,8 +148,8 @@ jobs:
         npm run lint
       displayName: 'Lint'
     - script: |
-        npx prebuild -t $(build_target) -u %GITHUB_RELEASE_TOKEN%
-        npx prebuild -t $(build_target) -a ia32 -u %GITHUB_RELEASE_TOKEN%
-      env:
-        GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
-      displayName: 'Prebuild and publish'
+      npx prebuild -t $(build_target) --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
+      npx prebuild -t $(build_target) -a ia32 --include-regex "\.(node|exe|dll|pdb)$" -u %GITHUB_RELEASE_TOKEN%
+    env:
+      GITHUB_RELEASE_TOKEN: $(GITHUB_RELEASE_TOKEN)
+    displayName: 'Prebuild and publish'
